@@ -1,5 +1,6 @@
 package stepdefs;
 
+import config.BaseApi;
 import cucumber.api.java.en.Given;
 import static io.restassured.RestAssured.given;
 import cucumber.api.java.en.When;
@@ -11,7 +12,8 @@ public class UsersStepDefinitions {
         this.stepData = stepData;
     }
 
-    private String baseURI = "https://reqres.in/api/users";
+    BaseApi baseApi = new BaseApi();
+    private String baseURI = baseApi.buildPath("users");
 
     @Given("a page exists with id (.*)")
     public void aUserWithId(int pageNumber) {

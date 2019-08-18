@@ -1,6 +1,6 @@
 package stepdefs;
 
-import cucumber.api.PendingException;
+import config.BaseApi;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import static io.restassured.RestAssured.given;
@@ -9,7 +9,8 @@ public class RegisterStepDefinitions {
     private StepData stepData;
     public RegisterStepDefinitions(StepData stepData) { this.stepData = stepData;}
 
-    private String baseURI = "https://reqres.in/api/register";
+    BaseApi baseApi = new BaseApi();
+    private String baseURI = baseApi.buildPath("register");
 
     @Given("^a user with valid email (.*) and password (.*) exists$")
     public void aUserWithValidEmailAndPasswordExists(String email, String password){
