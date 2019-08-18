@@ -1,6 +1,7 @@
 package stepdefs;
 
 import config.BaseApi;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import static io.restassured.RestAssured.given;
 import cucumber.api.java.en.When;
@@ -16,12 +17,12 @@ public class UsersStepDefinitions {
     private String baseURI = baseApi.buildPath("users");
 
     @Given("a page exists with id (.*)")
-    public void aUserWithId(int pageNumber) {
+    public void aPageWithIdExists(int pageNumber) {
         stepData.request = given().param("page", pageNumber);
     }
 
     @When("a client retrieves the page")
-    public void aClientRetrievesTheUserById() {
+    public void aClientRetrievesThePageById() {
         stepData.response = stepData.request.when().get(baseURI);
     }
 
@@ -53,5 +54,10 @@ public class UsersStepDefinitions {
     @When("^a client deletes the user$")
     public void aClientDeletesTheUser() throws Throwable {
         stepData.response = stepData.request.delete(baseURI);
+    }
+
+    @When("^client retrieves the user$")
+    public void clientRetrievesTheUser() throws Throwable {
+        stepData.response = stepData.request.when().get();
     }
 }
